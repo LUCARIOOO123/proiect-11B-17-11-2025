@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scăpăm de Fier Vechi - 2008 Style</title>
+  <meta name="description" content="Scăpăm de fierul tău vechi și suntem plătiți pentru asta. Site retro, funky, stil 2008, cu meniuri blink și butoane glossy." />
+  <link rel="icon" href="data:image/x-icon;," />
+  <style>
+    /* 2008 FUNKY RETRO VIBES */
+    html, body {
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      font-family: Tahoma, Verdana, Arial, sans-serif;
+      background: #1a1a1a url('https://img.freepik.com/premium-vector/90s-colorful-abstract-background-hipster-creative-wallpaper-funky-print_658126-954.jpg?w=360') repeat;
+      color: #fff;
+      overflow-x: hidden;
+      padding-top: 64px; /* space for fixed top menu */
+    }
+
+    /* Glittery star background overlay. */
+    .stars {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.25) 1px, transparent 1px);
+      background-size: 3px 3px;
+      pointer-events: none;
+      opacity: 0.25;
+      animation: twinkle 3s infinite alternate ease-in-out;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.15; }
+      100% { opacity: 0.35; }
+    }
+
+    /* Header with gradient and glossy shine */
+    header {
+      position: relative;
+      background: linear-gradient(180deg, #2b2e83, #121440);
+      box-shadow: 0 0 20px rgba(0,0,0,0.6) inset, 0 6px 18px rgba(0,0,0,0.6);
+      border-bottom: 3px solid #00d1ff;
+      text-align: center;
+      padding: 30px 10px 50px;
+    }
+    header:after {
+      content: "";
+      position: absolute; left: 0; right: 0; top: 0; height: 60px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.45), rgba(255,255,255,0));
+      pointer-events: none;
+    }
+    .logo {
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      font-size: 52px;
+      letter-spacing: 1px;
+      color: #00e5ff;
+      text-shadow: 0 0 8px #00f7ff, 0 0 18px #00a2ff, 2px 2px 0 #000;
+      transform: skew(-2deg);
+    }
+    .tagline {
+      margin-top: 6px;
+      font-size: 15px;
+      color: #d0f6ff;
+      text-shadow: 0 0 6px rgba(0, 255, 255, 0.6);
+      animation: blink 1.2s step-end infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0.35; }
+    }
+
+    /* Marquee nostalgia */
+    .marquee {
+      margin: 10px auto 0;
+      width: 94%;
+      border: 2px dashed #00ffcc;
+      background: rgba(0,0,0,0.35);
+      color: #9bfaff;
+      padding: 6px 10px;
+      font-size: 13px;
+      box-shadow: 0 0 10px rgba(0,255,204,0.2) inset;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 12s linear infinite;
+    }
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* Navigation tabs 2008 style */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      background: linear-gradient(180deg, #111, #000);
+      border-bottom: 2px solid #0ff;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    }
+    .tabs {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      padding: 10px;
+      flex-wrap: wrap;
+    }
+    .tab {
+      position: relative;
+      color: #fff;
+      text-decoration: none;
+      background: linear-gradient(180deg, #2efcff, #00a6c8 60%, #007d99 61%, #004a59);
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: 2px solid #00ecff;
+      box-shadow: 0 3px 0 #00313b, 0 0 12px rgba(0, 242, 255, 0.4);
+      text-shadow: 0 1px 0 #00313b;
+      font-weight: bold;
+      transition: transform 0.08s ease, box-shadow 0.08s ease;
+    }
+    .tab:before {
+      content: "";
+      position: absolute; left: 8px; right: 8px; top: 0; height: 35%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.05));
+      border-top-left-radius: 6px; border-top-right-radius: 6px;
+      pointer-events: none;
+    }
+    .tab:hover { transform: translateY(-2px) scale(1.02); }
+    .tab:active { transform: translateY(1px) scale(0.98); box-shadow: 0 1px 0 #00313b; }
+
+    /* Layout */
+    .wrap {
+      max-width: 980px;
+      margin: 22px auto;
+      padding: 0 14px 50px;
+    }
+
+    /* Panels */
+    .panel {
+      margin: 18px 0;
+      background: linear-gradient(180deg, #101010, #0a0a0a 60%, #050505);
+      border: 2px solid #00ffd5;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 255, 213, 0.22), 0 6px 24px rgba(0,0,0,0.8);
+      overflow: hidden;
+    }
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(180deg, #0d3e3f, #062223);
+      padding: 10px 14px;
+      border-bottom: 1px solid #00ffd5;
+      color: #9bfaff;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .panel-header .led {
+      width: 10px; height: 10px; border-radius: 50%; background: #00ff95; box-shadow: 0 0 10px #00ff95;
+      animation: led 1.4s ease-in-out infinite;
+    }
+    @keyframes led { 50% { opacity: .4; } }
+
+    .panel-content {
+      padding: 16px;
+      color: #eafffb;
+      line-height: 1.6;
+      font-size: 15px;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.6);
+    }
+
+    /* Clickable section cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 8px;
+    }
+    .card {
+      cursor: pointer;
+      background: linear-gradient(180deg, #2bffea, #00c2a8 50%, #008e78);
+      border: 2px solid #00ffd5;
+      border-radius: 12px;
+      color: #003a34;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+      box-shadow: 0 4px 0 #006455, 0 0 18px rgba(0,255,213,0.3);
+      padding: 14px;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+    .card:hover { transform: translateY(-3px) rotate(-0.5deg) scale(1.02); }
+    .card:active { transform: translateY(1px) scale(0.98); box-shadow: 0 2px 0 #006455; }
+    .card h3 { margin: 0 0 8px; font-size: 18px; }
+    .card p { margin: 0; font-size: 13px; color: #083a35; }
+
+    /* Example images styling */
+    .ex-media { margin-top: 10px; }
+    .ex-img { width: 100%; max-height: 380px; object-fit: cover; border-radius: 10px; border: 2px solid #00ffd5; box-shadow: 0 0 12px rgba(0,255,213,0.25); background:#000; }
+    .ex-caption { margin-top: 6px; font-size: 12px; color: #9bfaff; opacity: 0.9; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      color: #8ce9ff;
+      font-size: 12px;
+      padding: 30px 10px;
+      border-top: 2px solid #00ffd5;
+      background: linear-gradient(180deg, #05070e, #020308);
+    }
+
+    /* Smooth anchors */
+    html { scroll-behavior: smooth; }
+
+    /* Responsive fixes for tiny screens */
+    @media (max-width: 360px) {
+      .logo { font-size: 38px; }
+      .tab { padding: 8px 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+
+  <header>
+    <div class="logo">SCĂPĂM DE FIERUL TĂU VECHI</div>
+    <div class="tagline">„Luăm fier vechi, tu scapi de griji!” — Mihai ciocan, muncitor pe santier ✨</div>
+    <div class="marquee"><span>Promoție: ridicare rapidă, evaluare pe loc, preț corect! • Suntem disponibili Luni-Sâmbătă • Telefon: 07XX XXX XXX • Email: fier@retro-2008.ro • Click pe secțiuni pentru mai multe detalii ➜</span></div>
+  </header>
+
+  <nav>
+    <div class="tabs">
+      <a class="tab" href="#meniu">Meniul principal</a>
+      <a class="tab" href="#exemplari">Exemplari</a>
+      <a class="tab" href="#despre">Despre noi</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <!-- MENIUL PRINCIPAL -->
+    <section id="meniu" class="panel">
+      <div class="panel-header"><span class="led"></span> Meniul principal</div>
+      <div class="panel-content">
+        <p>
+          Bine ai venit! Ne ocupăm cu preluarea și valorificarea fierului vechi și a deșeurilor metalice. Tu scapi de lucrurile inutile, iar noi ne ocupăm de ridicare, cântărire și plată totul transparent și rapid.
+        </p>
+        <div class="cards">
+          <div class="card" data-target="#programare">
+            <h3>Programare ridicare</h3>
+            <p>Stabilim ziua și ora. Venim noi, încărcăm noi. Fără bătăi de cap.</p>
+          </div>
+          <div class="card" data-target="#evaluare">
+            <h3>Evaluare & plată</h3>
+            <p>Cântărire corectă, preț pe loc. Contract și chitanță, fără surprize.</p>
+          </div>
+          <div class="card" data-target="#acceptam">
+            <h3>Ce acceptăm</h3>
+            <p>Fier vechi, cupru, aluminiu, inox, cabluri, baterii auto și altele.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXEMPLARI -->
+    <section id="exemplari" class="panel">
+      <div class="panel-header"><span class="led"></span> Exemplari</div>
+      <div class="panel-content">
+        <p>
+          Exemple de lucruri pe care le-am ridicat recent. Click pe carduri pentru detalii rapide.
+        </p>
+        <div class="cards">
+          <div class="card" data-target="#ex1">
+            <h3>Demolare magazie</h3>
+            <p>Încărcare 2 tone fier vechi, predare în aceeași zi.</p>
+          </div>
+          <div class="card" data-target="#ex2">
+            <h3>Electrocasnice</h3>
+            <p>Frigidere și mașini de spălat scoase din uz, preluare eco.</p>
+          </div>
+          <div class="card" data-target="#ex3">
+            <h3>Atelier auto</h3>
+            <p>Jante, discuri, piese metalice, sortare și cântărire pe loc.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXEMPLARE DETALIATE -->
+    <section id="ex1" class="panel">
+      <div class="panel-header"><span class="led"></span> Demolare magazie</div>
+      <div class="panel-content">
+        <p>Am curățat o curte cu o magazie veche. Încărcare și transport în aceeași zi, cu echipă completă.</p>
+        <!-- Înlocuiește src cu link-ul direct către imaginea ta sau cu fișier local (ex: ex1.jpg) -->
+        <div class="ex-media">
+          <img class="ex-img" src="https://picsum.photos/seed/ex1/1200/800" alt="Demolare magazie - exemplu" />
+        </div>
+      </div>
+    </section>
+    <section id="ex2" class="panel">
+      <div class="panel-header"><span class="led"></span> Electrocasnice</div>
+      <div class="panel-content">
+        <p>Preluare responsabilă a frigiderelor, aragazelor și mașinilor de spălat, fără mizerie, fără stres.</p>
+        <!-- Înlocuiește src cu link-ul direct către imaginea ta sau cu fișier local (ex: ex2.jpg) -->
+        <div class="ex-media">
+          <img class="ex-img" src="https://picsum.photos/seed/ex2/1200/800" alt="Electrocasnice - exemplu" />
+        </div>
+      </div>
+    </section>
+    <section id="ex3" class="panel">
+      <div class="panel-header"><span class="led"></span> Atelier auto</div>
+      <div class="panel-content">
+        <p>Am colectat piese metalice, jante, motoare uzate. Sortare corectă, plată imediată.</p>
+        <!-- Înlocuiește src cu link-ul direct către imaginea ta sau cu fișier local (ex: ex3.jpg) -->
+        <div class="ex-media">
+          <img class="ex-img" src="https://t3.ftcdn.net/jpg/14/98/32/70/360_F_1498327048_cIL9JZVHdGDGZXWYDubdmvNiw2J5fTPF.jpg" alt="Atelier auto - exemplu" />
+        </div>
+      </div>
+    </section>
+
+    <!-- DESPRE NOI -->
+    <section id="despre" class="panel">
+      <div class="panel-header"><span class="led"></span> Despre noi</div>
+      <div class="panel-content">
+        <p>
+          Suntem o echipă locală cu experiență în colectarea, sortarea și valorificarea deșeurilor metalice.
+          Lucrăm transparent, la prețuri corecte și cu atenție la mediu. Scopul principal de desfășurare de activități de colectare, sortare, valorificare și comercializare a 
+          fierului vechi și a altor deșeuri metalice, contribuind la protecția mediului și la economia circulară.
+        </p>
+        <ul>
+          <li>Ridicare de la domiciliu sau sediu, cu programare flexibilă.</li>
+          <li>Plată pe loc, documente legale și proces clar.</li>
+          <li>Respectăm normele de mediu și recomandările de reciclare.</li>
+        </ul>
+        <p id="contact">
+          Contact: 07XX XXX XXX • Email: fier@retro-2008.ro • Program: Luni-Sâmbătă<br>
+          Sediul: Str. Industriei nr. 45, Municipiul Bacău, Jud. Bacău, România.
+        </p>
+      </div>
+    </section>
+
+    <!-- Domeniul de activitate -->
+    <section id="domeniu" class="panel">
+      <div class="panel-header"><span class="led"></span> Domeniul de activitate</div>
+      <div class="panel-content">
+        <p><strong>Obiect principal de activitate:</strong></p>
+        <ul>
+          <li>CAEN 4677 – Comerț cu ridicata al deșeurilor și resturilor (inclusiv fier vechi).</li>
+        </ul>
+        <p><strong>Activități secundare (domenii complementare):</strong></p>
+        <ul>
+          <li>CAEN 3811 – Colectarea deșeurilor nepericuloase</li>
+          <li>CAEN 3832 – Recuperarea materialelor reciclabile sortate</li>
+          <li>CAEN 4941 – Transporturi rutiere de mărfuri</li>
+          <li>CAEN 3312 – Repararea mașinilor și echipamentelor mecanice</li>
+          <li>CAEN 4672 – Comerț cu ridicata al metalelor și minereurilor metalice</li>
+          <li>CAEN 8129 – Alte activități de curățenie n.c.a.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Hidden detail panels that cards scroll to -->
+    <section id="programare" class="panel" style="display:none">
+      <div class="panel-header"><span class="led"></span> Programare ridicare</div>
+      <div class="panel-content">
+        Trimite un mesaj cu adresa, tipul materialului și cantitatea aproximativă. Stabilim rapid o fereastră orară.
+      </div>
+    </section>
+    <section id="evaluare" class="panel" style="display:none">
+      <div class="panel-header"><span class="led"></span> Evaluare & plată</div>
+      <div class="panel-content">
+        Cântărim la fața locului sau la centru, după caz. Prețul este comunicat dinainte și confirmat pe loc.
+      </div>
+    </section>
+    <section id="acceptam" class="panel" style="display:none">
+      <div class="panel-header"><span class="led"></span> Ce acceptăm</div>
+      <div class="panel-content">
+        Fier, oțel, cupru, aluminiu, bronz, inox, cabluri, baterii auto, radiatoare, electrocasnice mari.
+      </div>
+    </section>
+
+              </main>
+
+  <footer>
+    © 2006–2008 ECO METAL RECYCLING S.R.L. „Dă-ne fierul, ia-ți spațiul înapoi!” Toate drepturile rezervate.
+  </footer>
+
+  <script>
+    // Clickable card navigation: show hidden detail panel and scroll into view
+    document.querySelectorAll('.card').forEach(function(card){
+      card.addEventListener('click', function(){
+        var sel = this.getAttribute('data-target');
+        if(!sel) return;
+        // Hide all detail panels
+        document.querySelectorAll('main section[style*="display:none"], main section[data-detail="1"]').forEach(function(sec){
+          // keep them hidden by default
+        });
+        var el = document.querySelector(sel);
+        if (el) {
+          el.style.display = 'block';
+          el.setAttribute('data-detail','1');
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Add a quick highlight flash
+          el.animate([
+            { boxShadow: '0 0 0 rgba(0,255,213,0)' },
+            { boxShadow: '0 0 30px rgba(0,255,213,0.6)' },
+            { boxShadow: '0 0 0 rgba(0,255,213,0)' }
+          ], { duration: 800, easing: 'ease-in-out' });
+        }
+      });
+    });
+
+    // Force start at top on refresh; do not auto-scroll to anchors
+    window.addEventListener('load', function(){
+      // If there is a hash, avoid jumping to it on refresh
+      if (location.hash) {
+        // Keep detail section visible if needed, but reset scroll to top
+        var el = document.querySelector(location.hash);
+        if (el) { el.style.display = 'block'; el.setAttribute('data-detail','1'); }
+        // Clear hash without reloading
+        history.replaceState(null, document.title, location.pathname + location.search);
+      }
+      // Scroll to top after layout
+      setTimeout(function(){ window.scrollTo({ top: 0, left: 0, behavior: 'instant' in window ? 'instant' : 'auto' }); }, 0);
+    });
+
+      </script>
+</body>
+</html>
