@@ -236,7 +236,7 @@
         padding-top: 0;
         /* Push the tiled background down so it never peeks above the title */
         background-position: 0 80px;
-        background-color: #2b2e83; /* match header top color */
+        background-color: #1a1a1a; /* match page base color, no gradient tint */
       }
       /* Ensure header/nav cover safe area (notches) so no gap appears above header */
       @supports (padding-top: env(safe-area-inset-top)) {
@@ -257,8 +257,8 @@
         content: "";
         position: fixed;
         top: 0; left: 0; right: 0;
-        height: 80px; /* ensure full cover above header/text */
-        background: linear-gradient(180deg, #2b2e83, #121440);
+        height: 0; /* no visual overlay at top */
+        background: none;
         z-index: 1; /* above stars, below nav */
         pointer-events: none;
       }
