@@ -103,6 +103,15 @@
       background: linear-gradient(180deg, #111, #000);
       border-bottom: 2px solid #0ff;
       box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+      transform: translateY(0);
+      transition: transform 300ms ease, opacity 300ms ease;
+    }
+    /* Mobile-only hidden state for nav */
+    @media (max-width: 768px) {
+      nav.is-hidden {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
     }
     .tabs {
       display: flex;
@@ -216,6 +225,13 @@
 
     /* Smooth anchors */
     html { scroll-behavior: smooth; }
+
+    /* Mobile-only: remove top padding until nav becomes visible */
+    @media (max-width: 768px) {
+      body.nav-hidden {
+        padding-top: 0;
+      }
+    }
 
     /* Responsive fixes for tiny screens */
     @media (max-width: 360px) {
@@ -413,6 +429,54 @@
         }
       });
     });
+
+    // Mobile-only nav reveal after passing the main title
+    (function(){
+      var mq = window.matchMedia('(max-width: 768px)');
+      var nav = document.querySelector('nav');
+      var header = document.querySelector('header');
+      if (!nav || !header) return;
+
+      function applyInitialState() {
+        if (mq.matches) {
+          nav.classList.add('is-hidden');
+          document.body.classList.add('nav-hidden');
+        } else {
+          nav.classList.remove('is-hidden');
+          document.body.classList.remove('nav-hidden');
+        }
+      }
+
+      var lastKnownScrollY = 0;
+      var ticking = false;
+      function onScroll() {
+        lastKnownScrollY = window.scrollY || window.pageYOffset || 0;
+        if (!ticking) {
+          window.requestAnimationFrame(function(){
+            var headerBottom = header.getBoundingClientRect().bottom + (window.scrollY || window.pageYOffset || 0);
+            // Reveal nav when scrolled past the header bottom
+            if (mq.matches) {
+              if (lastKnownScrollY >= header.offsetTop + header.offsetHeight) {
+                nav.classList.remove('is-hidden');
+                document.body.classList.remove('nav-hidden');
+              } else {
+                nav.classList.add('is-hidden');
+                document.body.classList.add('nav-hidden');
+              }
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }
+
+      applyInitialState();
+      window.addEventListener('resize', applyInitialState, { passive: true });
+      window.addEventListener('orientationchange', applyInitialState, { passive: true });
+      window.addEventListener('scroll', onScroll, { passive: true });
+      // Ensure correct state on load as well
+      window.addEventListener('load', onScroll, { passive: true });
+    })();
 
     // Force start at top on refresh; do not auto-scroll to anchors
     window.addEventListener('load', function(){
