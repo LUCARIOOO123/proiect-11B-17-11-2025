@@ -30,6 +30,7 @@
       pointer-events: none;
       opacity: 0.25;
       animation: twinkle 3s infinite alternate ease-in-out;
+      z-index: 0;
     }
     @keyframes twinkle {
       0% { opacity: 0.15; }
@@ -44,6 +45,7 @@
       border-bottom: 3px solid #00d1ff;
       text-align: center;
       padding: 30px 10px 50px;
+      z-index: 1;
     }
     header:after {
       content: "";
@@ -228,11 +230,37 @@
     /* Smooth anchors */
     html { scroll-behavior: smooth; }
 
-    
+    /* Mobile: make nav overlay content and not affect layout */
+    @media (max-width: 768px) {
+      body { padding-top: 0; }
+      /* Ensure header/nav cover safe area (notches) so no gap appears above header */
+      @supports (padding-top: env(safe-area-inset-top)) {
+        header { padding-top: calc(30px + env(safe-area-inset-top)); }
+        nav { padding-top: env(safe-area-inset-top); }
+      }
+    }
+
     /* Responsive fixes for tiny screens */
     @media (max-width: 360px) {
       .logo { font-size: 38px; }
       .tab { padding: 8px 12px; }
+    }
+
+    /* Mobile overlay to mask any gap at the very top and keep visuals seamless */
+    @media (max-width: 768px) {
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        height: 16px;
+        background: linear-gradient(180deg, #2b2e83, #121440);
+        z-index: 1; /* above stars, below nav */
+        pointer-events: none;
+      }
+      /* Do not increase header padding for safe area; keep title position stable */
+      @supports (padding-top: env(safe-area-inset-top)) {
+        header { padding-top: 30px !important; }
+      }
     }
   </style>
 </head>
