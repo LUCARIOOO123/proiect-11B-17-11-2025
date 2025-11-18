@@ -47,6 +47,10 @@
       padding: 30px 10px 50px;
       z-index: 1;
     }
+    /* On mobile, remove the blue band at the very top of the header and use the page bg instead */
+    @media (max-width: 768px) {
+      header { background: linear-gradient(180deg, rgba(43,46,131,0) 0px, #121440 40px, #121440); }
+    }
     header:after {
       content: "";
       position: absolute; left: 0; right: 0; top: 0; height: 60px;
@@ -234,9 +238,9 @@
     @media (max-width: 768px) {
       body {
         padding-top: 0;
-        /* Push the tiled background down so it never peeks above the title */
-        background-position: 0 80px;
-        background-color: #1a1a1a; /* match page base color, no gradient tint */
+        /* Start the swirly background at the very top on mobile */
+        background-position: 0 0;
+        background-color: #1a1a1a;
       }
       /* Ensure header/nav cover safe area (notches) so no gap appears above header */
       @supports (padding-top: env(safe-area-inset-top)) {
@@ -253,12 +257,13 @@
 
     /* Mobile overlay to mask any gap at the very top and keep visuals seamless */
     @media (max-width: 768px) {
+      /* Top cover that matches the page background, independent of header scroll */
       body::before {
         content: "";
         position: fixed;
         top: 0; left: 0; right: 0;
-        height: 0; /* no visual overlay at top */
-        background: none;
+        height: 48px; /* mask any header top gradient while scrolling */
+        background: #1a1a1a; /* same as body base */
         z-index: 1; /* above stars, below nav */
         pointer-events: none;
       }
