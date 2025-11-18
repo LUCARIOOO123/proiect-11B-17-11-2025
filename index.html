@@ -105,12 +105,14 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.7);
       transform: translateY(0);
       transition: transform 300ms ease, opacity 300ms ease;
+      will-change: transform, opacity;
     }
     /* Mobile-only hidden state for nav */
     @media (max-width: 768px) {
       nav.is-hidden {
         transform: translateY(-100%);
         opacity: 0;
+        pointer-events: none;
       }
     }
     .tabs {
@@ -226,13 +228,7 @@
     /* Smooth anchors */
     html { scroll-behavior: smooth; }
 
-    /* Mobile-only: remove top padding until nav becomes visible */
-    @media (max-width: 768px) {
-      body.nav-hidden {
-        padding-top: 0;
-      }
-    }
-
+    
     /* Responsive fixes for tiny screens */
     @media (max-width: 360px) {
       .logo { font-size: 38px; }
@@ -440,28 +436,31 @@
       function applyInitialState() {
         if (mq.matches) {
           nav.classList.add('is-hidden');
-          document.body.classList.add('nav-hidden');
         } else {
           nav.classList.remove('is-hidden');
-          document.body.classList.remove('nav-hidden');
         }
       }
 
       var lastKnownScrollY = 0;
       var ticking = false;
+      var shown = false;
       function onScroll() {
         lastKnownScrollY = window.scrollY || window.pageYOffset || 0;
         if (!ticking) {
           window.requestAnimationFrame(function(){
-            var headerBottom = header.getBoundingClientRect().bottom + (window.scrollY || window.pageYOffset || 0);
-            // Reveal nav when scrolled past the header bottom
             if (mq.matches) {
-              if (lastKnownScrollY >= header.offsetTop + header.offsetHeight) {
-                nav.classList.remove('is-hidden');
-                document.body.classList.remove('nav-hidden');
-              } else {
-                nav.classList.add('is-hidden');
-                document.body.classList.add('nav-hidden');
+              var threshold = header.offsetTop + header.offsetHeight;
+              var h = 8; // hysteresis in px
+              if (lastKnownScrollY > threshold + h) {
+                if (!shown) {
+                  nav.classList.remove('is-hidden');
+                  shown = true;
+                }
+              } else if (lastKnownScrollY < threshold - h) {
+                if (shown) {
+                  nav.classList.add('is-hidden');
+                  shown = false;
+                }
               }
             }
             ticking = false;
