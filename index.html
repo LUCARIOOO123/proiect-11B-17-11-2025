@@ -7,6 +7,9 @@
   <title>Scăpăm de Fier Vechi - 2008 Style</title>
   <meta name="description" content="Scăpăm de fierul tău vechi și suntem plătiți pentru asta." />
   <link rel="icon" href="data:image/x-icon;," />
+  <!-- Performance hints to reduce background flashing on first load -->
+  <link rel="preconnect" href="https://img.freepik.com" crossorigin>
+  <link rel="preload" as="image" href="https://img.freepik.com/premium-vector/90s-colorful-abstract-background-hipster-creative-wallpaper-funky-print_658126-954.jpg?w=360">
   <style>
     /* 2008 FUNKY RETRO VIBES */
     html, body {
@@ -47,9 +50,9 @@
       padding: 30px 10px 50px;
       z-index: 1;
     }
-    /* On mobile, remove the blue band at the very top of the header and use the page bg instead */
+    /* Mobile: restore colorful header gradient */
     @media (max-width: 768px) {
-      header { background: linear-gradient(180deg, rgba(43,46,131,0) 0px, #121440 40px, #121440); }
+      header { background: linear-gradient(180deg, #2b2e83, #121440); }
     }
     header:after {
       content: "";
@@ -257,20 +260,10 @@
 
     /* Mobile overlay to mask any gap at the very top and keep visuals seamless */
     @media (max-width: 768px) {
-      /* Top cover that matches the page background, independent of header scroll */
-      body::before {
-        content: "";
-        position: fixed;
-        top: 0; left: 0; right: 0;
-        height: 48px; /* mask any header top gradient while scrolling */
-        background: #1a1a1a; /* same as body base */
-        z-index: 1; /* above stars, below nav */
-        pointer-events: none;
-      }
-      /* Do not increase header padding for safe area; keep title position stable */
-      @supports (padding-top: env(safe-area-inset-top)) {
-        header { padding-top: 30px !important; }
-      }
+      /* Remove top cover so no color band follows scroll; header/nav handle visuals */
+      body::before { content: none; }
+      /* Ensure background starts at the very top */
+      body { background-position: 0 0; }
     }
   </style>
 </head>
@@ -525,8 +518,10 @@
         // Clear hash without reloading
         history.replaceState(null, document.title, location.pathname + location.search);
       }
-      // Scroll to top after layout
-      setTimeout(function(){ window.scrollTo({ top: 0, left: 0, behavior: 'instant' in window ? 'instant' : 'auto' }); }, 0);
+      // Avoid forced scroll on desktop to reduce repaints; only on mobile
+      if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
+        setTimeout(function(){ window.scrollTo({ top: 0, left: 0 }); }, 0);
+      }
     });
 
       </script>
