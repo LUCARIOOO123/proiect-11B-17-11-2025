@@ -18,10 +18,12 @@
     body {
       margin: 0;
       font-family: Tahoma, Verdana, Arial, sans-serif;
-      background: #1a1a1a url('https://img.freepik.com/premium-vector/90s-colorful-abstract-background-hipster-creative-wallpaper-funky-print_658126-954.jpg?w=360') repeat;
+      /* Closer fallback color to disguise any early paint before image loads */
+      background: #222548 url('https://img.freepik.com/premium-vector/90s-colorful-abstract-background-hipster-creative-wallpaper-funky-print_658126-954.jpg?w=360') repeat;
       color: #fff;
       overflow-x: hidden;
       padding-top: 64px; /* space for fixed top menu */
+      background-position: 0 0; /* ensure starts at top by default */
     }
 
     /* Glittery star background overlay. */
@@ -243,7 +245,7 @@
         padding-top: 0;
         /* Start the swirly background at the very top on mobile */
         background-position: 0 0;
-        background-color: #1a1a1a;
+        background-color: #222548; /* match fallback to avoid dark flash */
       }
       /* Ensure header/nav cover safe area (notches) so no gap appears above header */
       @supports (padding-top: env(safe-area-inset-top)) {
@@ -260,8 +262,8 @@
 
     /* Mobile overlay to mask any gap at the very top and keep visuals seamless */
     @media (max-width: 768px) {
-      /* Remove top cover so no color band follows scroll; header/nav handle visuals */
-      body::before { content: none; }
+      /* Remove any fixed top overlay completely */
+      body::before { content: none !important; }
       /* Ensure background starts at the very top */
       body { background-position: 0 0; }
     }
