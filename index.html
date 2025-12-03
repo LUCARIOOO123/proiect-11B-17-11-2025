@@ -62,6 +62,8 @@
       background: linear-gradient(180deg, rgba(255,255,255,0.45), rgba(255,255,255,0));
       pointer-events: none;
     }
+
+    /* LOGO TEXT */
     .logo {
       font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
       font-size: 52px;
@@ -70,6 +72,36 @@
       text-shadow: 0 0 8px #00f7ff, 0 0 18px #00a2ff, 2px 2px 0 #000;
       transform: skew(-2deg);
     }
+
+    /* === NEW: LOGO WRAPPER + IMAGE + GLOW === */
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+
+    /* Înlocuiește src în HTML cu numele fișierului tău (ex: img/logo-fier.png) */
+    .logo-img {
+      width: 70px;
+      height: auto;
+      animation: logoGlow 2.2s ease-in-out infinite;
+      filter: drop-shadow(0 0 6px #00eaff) drop-shadow(0 0 12px #00cfff);
+    }
+
+    @keyframes logoGlow {
+      0% {
+        filter: drop-shadow(0 0 2px #00eaff) drop-shadow(0 0 4px #00eaff);
+      }
+      50% {
+        filter: drop-shadow(0 0 6px #00faff) drop-shadow(0 0 14px #00eaff);
+      }
+      100% {
+        filter: drop-shadow(0 0 2px #00eaff) drop-shadow(0 0 4px #00eaff);
+      }
+    }
+
     .tagline {
       margin-top: 6px;
       font-size: 15px;
@@ -252,6 +284,21 @@
         header { padding-top: calc(30px + env(safe-area-inset-top)); }
         nav { padding-top: env(safe-area-inset-top); }
       }
+
+      /* NEW: responsive logo on mobile */
+      .logo-wrap {
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .logo-img {
+        width: 90px;
+      }
+
+      .logo {
+        font-size: 40px !important;
+        text-align: center;
+      }
     }
 
     /* Responsive fixes for tiny screens */
@@ -273,7 +320,11 @@
   <div class="stars"></div>
 
   <header>
-    <div class="logo">SCĂPĂM DE FIERUL TĂU VECHI</div>
+    <!-- Înlocuiește logo.png cu fișierul tău (ex: img/logo-fier.png) -->
+    <div class="logo-wrap">
+      <img class="logo-img" src="logo.png" alt="Logo Fier Vechi">
+      <div class="logo">SCĂPĂM DE FIERUL TĂU VECHI!</div>
+    </div>
     <div class="tagline">„Luăm fier vechi, tu scapi de griji!” — Mihai ciocan, muncitor pe santier ✨</div>
     <div class="marquee"><span>Promoție: ridicare rapidă, evaluare pe loc, preț corect! • Suntem disponibili Luni-Sâmbătă • Telefon: 07XX XXX XXX • Email: fier@retro-2008.ro • Click pe secțiuni pentru mai multe detalii ➜</span></div>
   </header>
@@ -340,7 +391,6 @@
       <div class="panel-header"><span class="led"></span> Demolare magazie</div>
       <div class="panel-content">
         <p>Am curățat o curte cu o magazie veche. Încărcare și transport în aceeași zi, cu echipă completă.</p>
-        <!-- Înlocuiește src cu link-ul direct către imaginea ta sau cu fișier local (ex: ex1.jpg) -->
         <div class="ex-media">
           <img class="ex-img" src="https://picsum.photos/seed/ex1/1200/800" alt="Demolare magazie - exemplu" />
         </div>
@@ -350,7 +400,6 @@
       <div class="panel-header"><span class="led"></span> Electrocasnice</div>
       <div class="panel-content">
         <p>Preluare responsabilă a frigiderelor, aragazelor și mașinilor de spălat, fără mizerie, fără stres.</p>
-        <!-- Înlocuiește src cu link-ul direct către imaginea ta sau cu fișier local (ex: ex2.jpg) -->
         <div class="ex-media">
           <img class="ex-img" src="https://picsum.photos/seed/ex2/1200/800" alt="Electrocasnice - exemplu" />
         </div>
@@ -360,7 +409,6 @@
       <div class="panel-header"><span class="led"></span> Atelier auto</div>
       <div class="panel-content">
         <p>Am colectat piese metalice, jante, motoare uzate. Sortare corectă, plată imediată.</p>
-        <!-- Înlocuiește src cu link-ul direct către imaginea ta sau cu fișier local (ex: ex3.jpg) -->
         <div class="ex-media">
           <img class="ex-img" src="https://t3.ftcdn.net/jpg/14/98/32/70/360_F_1498327048_cIL9JZVHdGDGZXWYDubdmvNiw2J5fTPF.jpg" alt="Atelier auto - exemplu" />
         </div>
@@ -428,7 +476,7 @@
       </div>
     </section>
 
-              </main>
+  </main>
 
   <footer>
     © 2006–2008 ECO METAL RECYCLING S.R.L. „Dă-ne fierul, ia-ți spațiul înapoi!” Toate drepturile rezervate.
@@ -525,7 +573,6 @@
         setTimeout(function(){ window.scrollTo({ top: 0, left: 0 }); }, 0);
       }
     });
-
-      </script>
+  </script>
 </body>
 </html>
